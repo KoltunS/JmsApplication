@@ -11,6 +11,9 @@
 
 	<context:annotation-config></context:annotation-config>
 	<mvc:annotation-driven></mvc:annotation-driven>
+	<context:component-scan base-package="com.jmsapp.JmsApplication.dao"></context:component-scan>
+	
+	
 	<bean id="entityManagerFactoryTest"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -31,13 +34,22 @@
 		<property name="entityManagerFactory" ref="entityManagerFactoryTest"></property>
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
-	<context:property-placeholder location="/WEB-INF/appconfig.properties" />
 
-
-	<beans>
+	<context:property-placeholder location="/WEB-INF/appconfig.properties" order="0" ignore-unresolvable="true"/>
+	
+	<beans profile="production">
 		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 			<property name="jndiName" value="${jndi.name}" />
 		</bean>
 	</beans>
-
+	
+	<!-- In-memory Database -->
+	<beans profile="tests">
+		<bean id="dataSource"
+			class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="org.h2.Driver" />
+			<property name="url" value="jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE" />
+		</bean>
+	</beans>
+	
 </beans>
