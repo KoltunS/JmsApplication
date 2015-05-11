@@ -19,7 +19,7 @@
 	<nav class="navbar navbar-default">
 	<div class=" navbar-brand">JMS Sample Application</div>
 	</nav>
-	<div class="container-fluid" style="margin-top: 5%;">
+	<div class="container-fluid" style="margin-top: 5%;"> 
 		<div class="row">
 			<div class="col-md-4 ">
 				<div class="col-md-8">
@@ -44,7 +44,7 @@
 			</div>
 
 			<div class="col-md-8">
-				<table class="table table-bordered table-stripped">
+				<table class="table table-bordered table-striped">
 					<tr>
 						<th>Imię</th>
 						<th>Nazwisko</th>
@@ -53,7 +53,7 @@
 					<tr ng-repeat="user in users">
 						<td>{{user.firstname}}</td>
 						<td>{{user.lastname}}</td>
-						<td>{{user.email}}</td>
+						<td>{{user.email}}<div class="btn btn-danger btn-sm pull-right" ng-click="deleteUser($index)">Usuń</div></td>
 					</tr>
 				</table>
 			</div>

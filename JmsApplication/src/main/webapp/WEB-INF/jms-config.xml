@@ -24,7 +24,7 @@
 		<constructor-arg type="javax.jms.ConnectionFactory" ref="inVMConnectionFactory"/>
 		<property name="defaultDestination" ref="jmsQueue"></property>
 	</bean>
-	<!-- 
+	
 	<bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 	    <property name="connectionFactory" ref="inVMConnectionFactory"/>
 	    <property name="destination" ref="jmsQueue"/>
@@ -34,5 +34,4 @@
 	<bean id="msgListener"
 		class="com.jmsapp.JmsApplication.util.MsgListenerReceiver">
 	</bean> 
-	-->
 </beans>
