@@ -10,12 +10,12 @@ import com.jmsapp.JmsApplication.model.User;
 
 public class MsgListenerReceiver implements MessageListener{
 
+	//Log4j is thread safe
 	private static Logger logger = Logger.getLogger(MsgListenerReceiver.class.getName());
-	
-	private User receivedUser;
 	
 	@Override
 	public void onMessage(Message message) {
+		User receivedUser;
 		try
 	    {
 	        if (message instanceof ObjectMessage)
@@ -26,7 +26,7 @@ public class MsgListenerReceiver implements MessageListener{
 	    }
 	    catch (Exception exp)
 	    {
-	        logger.error("Received message is not an object message!");
+	        logger.error("Received message is not an object message! "+message);
 	    }
 		
 	}

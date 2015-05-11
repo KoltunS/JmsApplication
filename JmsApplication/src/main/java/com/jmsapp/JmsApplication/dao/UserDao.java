@@ -2,11 +2,18 @@ package com.jmsapp.JmsApplication.dao;
 
 import java.util.List;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.ObjectMessage;
+import javax.jms.Session;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Repository;
 
 import com.jmsapp.JmsApplication.model.User;
@@ -18,6 +25,9 @@ public class UserDao {
 	@PersistenceContext
 	private EntityManager em;
 	
+	@Autowired
+	JmsTemplate jmsTemplate;
+	
 	public User getUser(int id){
 		return em.find(User.class, id);
 	}
@@ -28,8 +38,19 @@ public class UserDao {
 	
 	@Transactional
 	public void createUser(User user){
-		logger.info("Saving user "+user.getFirstname()+" "+user.getLastname()+" to DB");
 		em.persist(user);
+		final User u = user;	
+		
+		MessageCreator mc = new MessageCreator(){
+			@Override
+			public Message createMessage(Session session) throws JMSException {
+				ObjectMessage om = session.createObjectMessage();
+				om.setObject(u);
+				return om;
+			}
+		};
+		
+		jmsTemplate.send(mc);
 	}
 	
 	@Transactional

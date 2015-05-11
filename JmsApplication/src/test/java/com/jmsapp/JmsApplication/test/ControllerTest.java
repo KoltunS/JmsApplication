@@ -34,7 +34,8 @@ import static org.hamcrest.Matchers.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 "file:src/main/webapp/WEB-INF/JMSApplication-servlet.xml",
-"file:src/main/webapp/WEB-INF/database-config.xml"
+"file:src/main/webapp/WEB-INF/database-config.xml",
+"file:src/main/webapp/WEB-INF/jms-config.xml"
 })
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
     DirtiesContextTestExecutionListener.class,

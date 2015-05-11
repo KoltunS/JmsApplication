@@ -34,6 +34,7 @@ public class HomeController {
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	@ResponseBody
 	public User createUser(@Valid @RequestBody User user){
+		logger.info("Creating user");
 		userDao.createUser(user);
 		return user;
 	}
