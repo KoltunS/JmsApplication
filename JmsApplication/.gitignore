@@ -1,1 +1,7 @@
 /target/
+.settings
+.settings/*
+.project
+.springBeans
+.classpath
+.tern-project

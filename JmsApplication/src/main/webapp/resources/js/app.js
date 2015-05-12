@@ -4,6 +4,7 @@ app.controller('jmsCtrl', function($scope, $http, $location) {
 	var url = $location.absUrl();
 	getAll();
 	
+	
 	function getAll(){
 		$http.get(url + "/all").success(function(d) {
 			$scope.users = d;
